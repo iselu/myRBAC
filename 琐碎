@@ -1,0 +1,12 @@
+# TODO:创建用户表 --done
+# TODO:创建权限表 --done
+# TODO:创建角色表 --done
+# TODO:创建UA表    U X R-- done
+# TODO:创建PA表    P X R-- done
+
+# TODO:想办法表示角色层次关系RH： R X R -- done
+
+
+# TODO:为用户表，角色表，权限表添加测试使用的内容
+# TODO:为UA 表，PA表 添加测试数据
+# TODO: 为RH表添加测试数据
