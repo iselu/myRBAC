@@ -25,7 +25,7 @@ class iniTestData(object):
     def iniRH(self,rh):
         pairs = self.getRHs(rh)
         for pair in pairs:
-            request.insertRH(pair[0],pair[1])
+            request.insertUpdateRH(pair[0],pair[1])
 
     def addUsers(self,users):
         for user in users:
@@ -69,6 +69,6 @@ def main():
     # initest.iniUserTable()
     # initest.iniCharactor()
     # initest.iniPrivileges()
-    initest.iniRH("RH1")
+    initest.iniRH("RH2")
 if __name__ == '__main__':
     main()

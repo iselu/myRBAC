@@ -8,9 +8,9 @@ conn = sqlite.connect(database)
 class Request(object):
     def __init__(self):
         self.conn = conn
-    def hasCircle(self):
-        return False
-        # TODO:implement
+
+    def hasCircle(self,parent,child):
+        return self.hasRH(child,parent)
     def getParents(self,child):
         parents = self.conn.execute("select parent FROM RH WHERE child = ?",(child,)).fetchall()
         return [x[0] for x in parents]
@@ -22,20 +22,25 @@ class Request(object):
                                  (parent,child)).fetchone() != None
 
     def insertUpdateRH(self,parent,child):
-        self.insertRH(parent,child)
-        self.updateRH(parent,child)
+        if not self.hasRH(parent,child):
+            self.insertRH(parent,child)
+            self.updateRH(parent,child)
 
     def updateRH(self,parent,child):
-        parents = self.getParents(child)
-        children = self.getChildren(parent)
+        parents = self.getParents(parent)
+        parents.append(parent)
+
+        children = self.getChildren(child)
+        children.append(child)
+
         for bigparent in parents:
             for littlechild in children:
-                self.insertRH(bigparent,littlechild)
+                if not self.hasRH(bigparent,littlechild):
+                    self.insertRH(bigparent,littlechild)
 
     def insertRH(self,parent,child):
-        if not self.hasRH(parent,child):
-            self.conn.execute("insert into RH VALUES (?,?)",(parent, child))
-            self.conn.commit()
+        self.conn.execute("insert into RH VALUES (?,?)",(parent, child))
+        self.conn.commit()
 
     def addUser(self,userid,name):
         self.conn.execute("insert into user VALUES (?,?)",(userid, name))
