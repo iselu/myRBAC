@@ -53,7 +53,9 @@ class iniTestData(object):
         name = privilege[1]
         request.addPrivilege(theID,name)
 
-
+    def getTreefromRH(self,charactor):
+        # return a tree which treat charactor as the root tree
+        pass
 
 class Test(object):
     def __init__(self):
